@@ -33,10 +33,13 @@ module Devise
           args_last.delete('locale') if args_last.is_a?(Hash)
         end
 
-        # Use #deliver_now if supported, otherwise falls back to #deliver.
+        # Use deliver_method if configured.
+        # Otherwise use #deliver_now if supported, or fall back to #deliver.
         # Added in preparation for the planned removal of #deliver in Rails 5.
         def deliver_method(mailer)
-          if mailer.respond_to?(:deliver_now)
+          method = if Devise::Async.deliver_method.present?
+            Devise::Async.deliver_method
+          elsif mailer.respond_to?(:deliver_now)
             :deliver_now
           else
             :deliver

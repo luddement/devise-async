@@ -36,6 +36,9 @@ module Devise
     mattr_accessor :enabled
     @@enabled = true
 
+    mattr_accessor :deliver_method
+    @@deliver_method = nil
+
     # Allow configuring Devise::Async with a block
     #
     # Example:

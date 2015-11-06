@@ -27,5 +27,10 @@ module Devise
       Async.priority = nil
     end
 
+    it "stores deliver_method" do
+      Async.deliver_method = :deliver_now!
+      Async.priority.must_equal :deliver_now!
+    end
+
   end
 end
