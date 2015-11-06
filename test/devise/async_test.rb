@@ -27,5 +27,10 @@ module Devise
       Async.priority = nil
     end
 
+    it "stores deliver_with_bang" do
+      Async.deliver_with_bang = true
+      Async.priority.must_equal true
+    end
+
   end
 end

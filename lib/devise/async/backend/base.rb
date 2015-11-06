@@ -36,13 +36,14 @@ module Devise
         # Use #deliver_now if supported, otherwise falls back to #deliver.
         # Added in preparation for the planned removal of #deliver in Rails 5.
         def deliver_method(mailer)
-          if mailer.respond_to?(:deliver_now)
+          method = if mailer.respond_to?(:deliver_now)
             :deliver_now
           else
             :deliver
           end
-        end
 
+          Devise::Async.deliver_with_bang.nil? ? :"#{method}!" : method
+        end
       end
     end
   end

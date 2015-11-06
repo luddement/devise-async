@@ -36,6 +36,9 @@ module Devise
     mattr_accessor :enabled
     @@enabled = true
 
+    mattr_accessor :deliver_with_bang
+    @@deliver_with_bang = false
+
     # Allow configuring Devise::Async with a block
     #
     # Example:
